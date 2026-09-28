@@ -4,7 +4,7 @@ ASP.NET Core API of [shared-todo](../README.md), Vertical Slice Architecture, EF
 
 ## Development
 
-Requires the .NET 10 SDK and SQL Server LocalDB (the Development connection string targets `(localdb)\mssqllocaldb`).
+Requires the .NET SDK version in `global.json` and SQL Server LocalDB (the Development connection string targets `(localdb)\mssqllocaldb`).
 
 ```bash
 dotnet restore

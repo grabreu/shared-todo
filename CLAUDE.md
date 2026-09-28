@@ -48,9 +48,9 @@ Future-you revisiting this months later, or someone browsing the portfolio to se
 
 - `api/` - .NET (ASP.NET Core) API, Vertical Slice Architecture. See `api/CLAUDE.md`.
 - `web/` - React SPA, feature-based folders, installable as a minimal PWA. See `web/CLAUDE.md`.
-- `.github/workflows/` - one CI workflow per app (`api-ci.yml`, `web-ci.yml`), each path-filtered to its own folder and to its own workflow file.
+- `.github/` - one CI workflow per app (`api-ci.yml`, `web-ci.yml`), each path-filtered to its own folder and to its own workflow file, and `dependabot.yml` (actions, NuGet, npm).
 
-Per-app files (`.gitignore`, `CLAUDE.md`, `README.md`) live inside the app folder; the root only holds what spans both apps.
+Toolchain files (`CLAUDE.md`, `README.md`, tool config, toolchain-specific `.gitignore` patterns) live inside the app folder. The root only holds what spans both apps: `.gitignore` (env and OS files), `.vscode/`, `.gitattributes`, and `.github/`.
 
 ### Validation
 
