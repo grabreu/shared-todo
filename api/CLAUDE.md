@@ -16,7 +16,6 @@
   - `Domain/` - entities and business rules; only `SeedWork` (domain event contracts) so far.
   - `Data/` - `ApplicationDbContext`, EF Core migrations, and `DispatchDomainEventsInterceptor` (publishes domain events after `SaveChanges`).
   - `Common/` - cross-cutting code: `ValidationBehavior` (FluentValidation in the Mediator pipeline) and `GlobalExceptionHandler`.
-  - `Dockerfile` - image build; its context is `api/`.
 - `tests/` - test projects (none yet).
 
 Commands and queries go through `Mediator` (source generator); packages are versioned centrally in `Directory.Packages.props`.
