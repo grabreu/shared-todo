@@ -44,15 +44,18 @@ Future-you revisiting this months later, or someone browsing the portfolio to se
 
 ### Source
 
-Monorepo, not yet scaffolded:
+Monorepo:
 
-- `api/` - .NET (ASP.NET Core) API, Vertical Slice Architecture (one slice per use case: command/query + handler + endpoint colocated under `Features/`).
-- `web/` - React SPA, feature-based folders, installable as a minimal PWA.
+- `api/` - .NET (ASP.NET Core) API, Vertical Slice Architecture (one slice per use case: command/query + handler + endpoint colocated under `Features/`, no slices yet). Solution `api/SharedTodo.slnx`, code in `api/src/SharedTodo.Api/`, tests go in `api/tests/` (none yet).
+- `web/` - React SPA, feature-based folders, installable as a minimal PWA. Not yet scaffolded.
 
 ### Validation
 
-TODO: no scaffold, no commands yet. Once `api/` and `web/` exist, this section should list the build/test/lint commands to run before considering a change done; CI (`.github/workflows/api-ci.yml`, `web-ci.yml`) will run the same on push/PR to `main`.
+For `api/`, run from `api/`: `dotnet restore`, `dotnet build --no-restore -c Release`, `dotnet format --no-restore --verify-no-changes --severity info`, `dotnet test --no-build -c Release` (no test projects yet) before considering a change done; CI (`.github/workflows/api-ci.yml`) runs the same on push/PR to `main`, path-filtered to `api/`.
+
+TODO: add `web/` commands and its CI once it exists.
 
 ### Open Questions
 
-- TODO: scaffold `api/` (Vertical Slice API) and `web/` (React SPA), with ASP.NET Core Identity issuing JWT access + rotated refresh tokens (email/password only, no Google yet) working end-to-end between the deployed SPA and API. This is milestone 0 (Foundation); see the project's idea draft for the full milestone order.
+- TODO: scaffold `web/` (React SPA) and add ASP.NET Core Identity issuing JWT access + rotated refresh tokens (email/password only, no Google yet), working end-to-end between the deployed SPA and API. Remaining work of milestone 0 (Foundation); see the project's idea draft for the full milestone order.
+- TODO: API CD (image publish + Azure Container Apps deploy) is not set up; the infra doesn't exist yet.
