@@ -1,29 +1,23 @@
 # shared-todo
 
 [![API CI](https://github.com/grabreu/shared-todo/actions/workflows/api-ci.yml/badge.svg?branch=main)](https://github.com/grabreu/shared-todo/actions/workflows/api-ci.yml)
+[![Web CI](https://github.com/grabreu/shared-todo/actions/workflows/web-ci.yml/badge.svg?branch=main)](https://github.com/grabreu/shared-todo/actions/workflows/web-ci.yml)
 [![License](https://img.shields.io/github/license/grabreu/shared-todo?style=flat-square)](LICENSE)
 
 A collaborative to-do list for small groups (family, a school group, a small team): a shared list of items, synced in real time for everyone looking at it. Not a project-management tool, no Trello-style boards.
 
-Status: early scaffold (API skeleton only), no features implemented yet.
+Status: early scaffold (API and web skeletons), no features implemented yet.
 
 ## Tech stack
 
-.NET (ASP.NET Core), Vertical Slice Architecture · React SPA · SignalR · EF Core + SQL Server · Azure Container Apps (API) · Cloudflare Workers (frontend)
+.NET (ASP.NET Core), Vertical Slice Architecture · React SPA (Vite, TanStack Router, Tailwind) · SignalR · EF Core + SQL Server · Azure Container Apps (API) · Cloudflare Workers (frontend)
 
-## Development
+## Structure
 
-Requires the .NET 10 SDK.
+Monorepo with one folder per app, each with its own setup instructions:
 
-```bash
-cd api
-dotnet restore
-dotnet build --no-restore
-```
-
-Other commands: `dotnet format --verify-no-changes --severity info` (formatting check), `dotnet test` (no tests yet).
-
-TODO: dev-server and local database setup (the Development connection string targets SQL Server LocalDB), and `web/` setup once it exists.
+- [api/](api/README.md): ASP.NET Core API.
+- [web/](web/README.md): React SPA.
 
 ## Deployment
 

@@ -45,7 +45,7 @@ jobs:
     needs: changes
     if: needs.changes.outputs.api == 'true'
     runs-on: ubuntu-latest
-    
+
     defaults:
       run:
         working-directory: api
@@ -57,7 +57,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
         with:
-          dotnet-version: 10.0.x
+          global-json-file: api/global.json
           cache: true
           cache-dependency-path: api/Directory.Packages.props
 
@@ -72,7 +72,7 @@ jobs:
     needs: changes
     if: needs.changes.outputs.api == 'true'
     runs-on: ubuntu-latest
-    
+
     defaults:
       run:
         working-directory: api
@@ -84,7 +84,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
         with:
-          dotnet-version: 10.0.x
+          global-json-file: api/global.json
           cache: true
           cache-dependency-path: api/Directory.Packages.props
 

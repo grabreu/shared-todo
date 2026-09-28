@@ -1,5 +1,5 @@
-bin/
-obj/
-.vs/
-*.user
-*.suo
+.env
+.env.*
+!.env.example
+.DS_Store
+*.local
