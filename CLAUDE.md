@@ -6,6 +6,8 @@ Collaborative to-do list for small groups (family, school group, small team): a 
 
 Read `README.md` before making changes: it documents the project pitch and business rules. `docs/architecture.md` (domain model, request flow) and `docs/adr/` (significant, hard-to-reverse decisions) don't exist yet; add them once the foundation milestone below lands, and check `docs/adr/` before revisiting a past decision from then on.
 
+This is a monorepo. Each app has its own `CLAUDE.md` with its source layout, validation commands, and open questions; read the one for the app you are changing. The rules in this file apply to both.
+
 ## General Rules
 
 - Keep changes scoped to the requested change.
@@ -44,18 +46,17 @@ Future-you revisiting this months later, or someone browsing the portfolio to se
 
 ### Source
 
-Monorepo:
+- `api/` - .NET (ASP.NET Core) API, Vertical Slice Architecture. See `api/CLAUDE.md`.
+- `web/` - React SPA, feature-based folders, installable as a minimal PWA. See `web/CLAUDE.md`.
+- `.github/workflows/` - one CI workflow per app (`api-ci.yml`, `web-ci.yml`), each path-filtered to its own folder and to its own workflow file.
 
-- `api/` - .NET (ASP.NET Core) API, Vertical Slice Architecture (one slice per use case: command/query + handler + endpoint colocated under `Features/`, no slices yet). Solution `api/SharedTodo.slnx`, code in `api/src/SharedTodo.Api/`, tests go in `api/tests/` (none yet).
-- `web/` - React SPA, feature-based folders, installable as a minimal PWA. Not yet scaffolded.
+Per-app files (`.gitignore`, `CLAUDE.md`, `README.md`) live inside the app folder; the root only holds what spans both apps.
 
 ### Validation
 
-For `api/`, run from `api/`: `dotnet restore`, `dotnet build --no-restore -c Release`, `dotnet format --no-restore --verify-no-changes --severity info`, `dotnet test --no-build -c Release` (no test projects yet) before considering a change done; CI (`.github/workflows/api-ci.yml`) runs the same on push/PR to `main`, path-filtered to `api/`.
-
-TODO: add `web/` commands and its CI once it exists.
+Run the commands listed in the `CLAUDE.md` of each app you changed before considering a change done; the matching CI workflow runs the same on push/PR to `main`.
 
 ### Open Questions
 
-- TODO: scaffold `web/` (React SPA) and add ASP.NET Core Identity issuing JWT access + rotated refresh tokens (email/password only, no Google yet), working end-to-end between the deployed SPA and API. Remaining work of milestone 0 (Foundation); see the project's idea draft for the full milestone order.
-- TODO: API CD (image publish + Azure Container Apps deploy) is not set up; the infra doesn't exist yet.
+- TODO: add ASP.NET Core Identity issuing JWT access + rotated refresh tokens (email/password only, no Google yet), working end-to-end between the deployed SPA and API. Remaining work of milestone 0 (Foundation); see the project's idea draft for the full milestone order.
+- TODO: API CD (image publish + Azure Container Apps deploy) and web CD (Cloudflare Workers) are not set up; the infra doesn't exist yet.
