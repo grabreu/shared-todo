@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/SharedTodo.Api/SharedTodo.Api.csproj" Id="a3430869-e44a-41c8-b9df-4b674d3a678d" />
+  </Folder>
+  <Folder Name="/tests/" />
+</Solution>
