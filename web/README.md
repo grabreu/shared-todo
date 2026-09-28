@@ -4,7 +4,7 @@ React SPA of [shared-todo](../README.md): Vite, TanStack Router (file-based rout
 
 ## Development
 
-Requires Node.js 26 (the version CI uses) and pnpm (version pinned in `package.json`).
+Requires the Node.js version in `.node-version` and pnpm (version pinned in `package.json`).
 
 ```bash
 pnpm install
