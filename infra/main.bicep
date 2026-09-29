@@ -85,7 +85,7 @@ resource api 'Microsoft.App/containerApps@2026-01-01' = {
 }
 
 resource migrationJob 'Microsoft.App/jobs@2026-01-01' = {
-  name: 'caj-shared-todo-api-mig-prod'
+  name: 'caj-shared-todo-migration-prod'
   location: location
   identity: {
     type: 'SystemAssigned'
