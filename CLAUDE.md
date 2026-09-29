@@ -4,7 +4,7 @@
 
 Collaborative to-do list for small groups (family, school group, small team): a shared list of items, synced in real time for everyone viewing it. Not a project-management tool, no boards.
 
-Read `README.md` before making changes: it documents the project pitch and business rules. `docs/architecture.md` (domain model, request flow) and `docs/adr/` (significant, hard-to-reverse decisions) don't exist yet; add them once the foundation milestone below lands, and check `docs/adr/` before revisiting a past decision from then on.
+Read `README.md` before making changes: it documents the project pitch and business rules. Significant, hard-to-reverse decisions are recorded in `docs/adr/`: check it before revisiting one, and add an entry when making a new one.
 
 This is a monorepo. Each app has its own `CLAUDE.md` with its source layout, validation commands, and open questions; read the one for the app you are changing. The rules in this file apply to both.
 
@@ -49,6 +49,7 @@ Future-you revisiting this months later, or someone browsing the portfolio to se
 - `api/` - .NET (ASP.NET Core) API, Vertical Slice Architecture. See `api/CLAUDE.md`.
 - `web/` - React SPA, feature-based folders, installable as a minimal PWA. See `web/CLAUDE.md`.
 - `infra/` - Bicep for this project's own Azure resources (Container App, Container Apps Job, database). Shared resources (Container Apps environment, SQL Server) live in a separate repo, `azure-infra`, referenced here as `existing`. See `infra/README.md`.
+- `docs/adr/` - significant, hard-to-reverse decisions.
 - `.github/` - one CI workflow per app (`api-ci.yml`, `web-ci.yml`, `infra-ci.yml`), each path-filtered to its own folder and to its own workflow file, and `dependabot.yml` (actions, NuGet, npm).
 
 Toolchain files (`CLAUDE.md`, `README.md`, tool config, toolchain-specific `.gitignore` patterns) live inside the app folder. The root only holds what spans both apps: `.gitignore` (env and OS files), `.vscode/`, `.gitattributes`, and `.github/`.
