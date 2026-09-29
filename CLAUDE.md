@@ -48,15 +48,17 @@ Future-you revisiting this months later, or someone browsing the portfolio to se
 
 - `api/` - .NET (ASP.NET Core) API, Vertical Slice Architecture. See `api/CLAUDE.md`.
 - `web/` - React SPA, feature-based folders, installable as a minimal PWA. See `web/CLAUDE.md`.
+- `infra/` - Bicep for this project's own Azure resources (Container App, Container Apps Job, database). Shared resources (Container Apps environment, SQL Server) live in a separate repo, `azure-infra`, referenced here as `existing`. See `infra/README.md`.
 - `.github/` - one CI workflow per app (`api-ci.yml`, `web-ci.yml`), each path-filtered to its own folder and to its own workflow file, and `dependabot.yml` (actions, NuGet, npm).
 
 Toolchain files (`CLAUDE.md`, `README.md`, tool config, toolchain-specific `.gitignore` patterns) live inside the app folder. The root only holds what spans both apps: `.gitignore` (env and OS files), `.vscode/`, `.gitattributes`, and `.github/`.
 
 ### Validation
 
-Run the commands listed in the `CLAUDE.md` of each app you changed before considering a change done; the matching CI workflow runs the same on push/PR to `main`.
+Run the commands listed in the `CLAUDE.md` of each app you changed (`api/`, `web/`) or `infra/README.md` (`infra/`) before considering a change done. The matching CI workflow runs the same for `api/` and `web/`; `infra/` has no CI yet.
 
 ### Open Questions
 
 - TODO: add ASP.NET Core Identity issuing JWT access + rotated refresh tokens (email/password only, no Google yet), working end-to-end between the deployed SPA and API. Remaining work of milestone 0 (Foundation); see the project's idea draft for the full milestone order.
-- TODO: API CD (image publish + Azure Container Apps deploy) and web CD (Cloudflare Workers) are not set up; the infra doesn't exist yet.
+- TODO: API CD (image publish + Azure Container Apps deploy) and web CD (Cloudflare Workers) are not set up. `infra/` (Bicep) exists but hasn't been applied to Azure yet, and has no CI (`az bicep build`) of its own.
+- TODO: the SQL grants for the API and migration job identities, and the GitHub OIDC identity for CD, are bootstrapped manually (not in Bicep), matching `azure-infra`'s own identity ADR.
