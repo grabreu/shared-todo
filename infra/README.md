@@ -15,4 +15,4 @@ Always run `what-if` first; it previews what would change without applying anyth
 
 ## Deployment
 
-No CI or CD yet; applying is manual, see Development above.
+No CD; applying is manual, see Development above.
