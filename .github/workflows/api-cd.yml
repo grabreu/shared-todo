@@ -99,14 +99,51 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+      - name: Update migration job image
+        uses: azure/cli@9eb25b8360668fb0ecbafa808d40e2197b2f5f52 # v3
+        with:
+          inlineScript: |
+            az containerapp job update \
+              --name caj-shared-todo-migration-prod \
+              --resource-group rg-shared-prod \
+              --image ${{ needs.publish.outputs.image_ref }}
+
       - name: Run database migration
         uses: azure/cli@9eb25b8360668fb0ecbafa808d40e2197b2f5f52 # v3
         with:
           inlineScript: |
-            az containerapp job start \
+            set -e
+
+            EXECUTION_NAME=$(az containerapp job start \
               --name caj-shared-todo-migration-prod \
               --resource-group rg-shared-prod \
-              --image ${{ needs.publish.outputs.image_ref }}
+              --query name -o tsv)
+
+            echo "Started execution: $EXECUTION_NAME"
+
+            for i in $(seq 1 30); do
+              STATUS=$(az containerapp job execution show \
+                --name caj-shared-todo-migration-prod \
+                --resource-group rg-shared-prod \
+                --job-execution-name "$EXECUTION_NAME" \
+                --query properties.status -o tsv)
+
+              echo "Status: $STATUS"
+
+              if [ "$STATUS" = "Succeeded" ]; then
+                exit 0
+              fi
+
+              if [ "$STATUS" = "Failed" ]; then
+                echo "Migration failed"
+                exit 1
+              fi
+
+              sleep 10
+            done
+
+            echo "Timed out waiting for migration to finish"
+            exit 1
 
       - name: Update Container App image
         uses: azure/cli@9eb25b8360668fb0ecbafa808d40e2197b2f5f52 # v3
