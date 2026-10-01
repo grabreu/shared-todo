@@ -2,7 +2,7 @@
 
 ## Repository
 
-.NET (ASP.NET Core) API of shared-todo, Vertical Slice Architecture: one slice per use case, with command/query + handler + endpoint colocated. General rules, Git, and Documentation conventions are in the root `CLAUDE.md`; this file only adds what is specific to `api/`.
+.NET (ASP.NET Core) API of shared-todo, Vertical Slice Architecture: one slice per use case, with command/query + handler + endpoint colocated. General rules, Git, and Documentation conventions are in the root `CLAUDE.md`; this file only adds what is specific to `apps/api/`.
 
 ---
 
@@ -22,7 +22,7 @@ Commands and queries go through `Mediator` (source generator); packages are vers
 
 ### Validation
 
-Run from `api/`: `dotnet restore`, `dotnet build --no-restore -c Release`, `dotnet format --no-restore --verify-no-changes --severity info`, `dotnet test --no-build -c Release` (no test projects yet) before considering a change done; CI (`.github/workflows/api-ci.yml`) runs the same on push/PR to `main`, path-filtered to `api/`.
+Run from `apps/api/`: `dotnet restore`, `dotnet build --no-restore -c Release`, `dotnet format --no-restore --verify-no-changes --severity info`, `dotnet test --no-build -c Release` (no test projects yet) before considering a change done; CI (`.github/workflows/api-ci.yml`) runs the same on push/PR to `main`, path-filtered to `apps/api/`.
 
 ### Open Questions
 

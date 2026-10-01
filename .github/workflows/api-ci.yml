@@ -37,7 +37,7 @@ jobs:
         with:
           filters: |
             api:
-              - api/**
+              - apps/api/**
               - .github/workflows/api-ci.yml
 
   format:
@@ -48,7 +48,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: api
+        working-directory: apps/api
 
     steps:
       - name: Checkout
@@ -57,9 +57,9 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
         with:
-          global-json-file: api/global.json
+          global-json-file: apps/api/global.json
           cache: true
-          cache-dependency-path: api/Directory.Packages.props
+          cache-dependency-path: apps/api/Directory.Packages.props
 
       - name: Restore
         run: dotnet restore
@@ -75,7 +75,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: api
+        working-directory: apps/api
 
     steps:
       - name: Checkout
@@ -84,9 +84,9 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
         with:
-          global-json-file: api/global.json
+          global-json-file: apps/api/global.json
           cache: true
-          cache-dependency-path: api/Directory.Packages.props
+          cache-dependency-path: apps/api/Directory.Packages.props
 
       - name: Restore
         run: dotnet restore
