@@ -37,7 +37,7 @@ jobs:
         with:
           filters: |
             web:
-              - web/**
+              - apps/web/**
               - .github/workflows/web-ci.yml
 
   format:
@@ -48,7 +48,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: web
+        working-directory: apps/web
 
     steps:
       - name: Checkout
@@ -57,14 +57,14 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
         with:
-          package_json_file: web/package.json
+          package_json_file: apps/web/package.json
 
       - name: Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version-file: web/.node-version
+          node-version-file: apps/web/.node-version
           cache: pnpm
-          cache-dependency-path: web/pnpm-lock.yaml
+          cache-dependency-path: apps/web/pnpm-lock.yaml
 
       - name: Install
         run: pnpm install --frozen-lockfile
@@ -80,7 +80,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: web
+        working-directory: apps/web
 
     steps:
       - name: Checkout
@@ -89,14 +89,14 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
         with:
-          package_json_file: web/package.json
+          package_json_file: apps/web/package.json
 
       - name: Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version-file: web/.node-version
+          node-version-file: apps/web/.node-version
           cache: pnpm
-          cache-dependency-path: web/pnpm-lock.yaml
+          cache-dependency-path: apps/web/pnpm-lock.yaml
 
       - name: Install
         run: pnpm install --frozen-lockfile

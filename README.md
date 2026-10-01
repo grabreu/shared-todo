@@ -17,8 +17,8 @@ Status: early scaffold (API and web skeletons), no features implemented yet.
 
 Monorepo with one folder per app, each with its own setup instructions:
 
-- [api/](api/README.md): ASP.NET Core API.
-- [web/](web/README.md): React SPA.
+- [apps/api/](apps/api/README.md): ASP.NET Core API.
+- [apps/web/](apps/web/README.md): React SPA.
 - [infra/](infra/README.md): Bicep for this project's own Azure resources.
 
 ## Deployment

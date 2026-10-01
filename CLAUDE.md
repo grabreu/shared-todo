@@ -46,17 +46,17 @@ Future-you revisiting this months later, or someone browsing the portfolio to se
 
 ### Source
 
-- `api/` - .NET (ASP.NET Core) API, Vertical Slice Architecture. See `api/CLAUDE.md`.
-- `web/` - React SPA, feature-based folders, installable as a minimal PWA. See `web/CLAUDE.md`.
+- `apps/api/` - .NET (ASP.NET Core) API, Vertical Slice Architecture. See `apps/api/CLAUDE.md`.
+- `apps/web/` - React SPA, feature-based folders, installable as a minimal PWA. See `apps/web/CLAUDE.md`.
 - `infra/` - Bicep for this project's own Azure resources (Container App, Container Apps Job, database). Shared resources (Container Apps environment, SQL Server) live in a separate repo, `azure-infra`, referenced here as `existing`. See `infra/README.md`.
 - `docs/adr/` - significant, hard-to-reverse decisions.
 - `.github/` - one CI workflow per app (`api-ci.yml`, `web-ci.yml`, `infra-ci.yml`), each path-filtered to its own folder and to its own workflow file, and `dependabot.yml` (actions, NuGet, npm).
 
-Toolchain files (`CLAUDE.md`, `README.md`, tool config, toolchain-specific `.gitignore` patterns) live inside the app folder. The root only holds what spans both apps: `.gitignore` (env and OS files), `.vscode/`, `.gitattributes`, and `.github/`.
+Toolchain files (`CLAUDE.md`, `README.md`, tool config, toolchain-specific `.gitignore` patterns) live inside the app folder. The root only holds what spans both apps: `.gitignore` (env and OS files), `.gitattributes`, and `.github/`.
 
 ### Validation
 
-Run the commands listed in the `CLAUDE.md` of each app you changed (`api/`, `web/`) or `infra/README.md` (`infra/`) before considering a change done; the matching CI workflow runs the same on push/PR to `main`.
+Run the commands listed in the `CLAUDE.md` of each app you changed (`apps/api/`, `apps/web/`) or `infra/README.md` (`infra/`) before considering a change done; the matching CI workflow runs the same on push/PR to `main`.
 
 ### Open Questions
 

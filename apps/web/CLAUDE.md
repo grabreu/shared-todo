@@ -2,7 +2,7 @@
 
 ## Repository
 
-React SPA of shared-todo, feature-based folders, installable as a minimal PWA. General rules, Git, and Documentation conventions are in the root `CLAUDE.md`; this file only adds what is specific to `web/`.
+React SPA of shared-todo, feature-based folders, installable as a minimal PWA. General rules, Git, and Documentation conventions are in the root `CLAUDE.md`; this file only adds what is specific to `apps/web/`.
 
 ---
 
@@ -12,7 +12,7 @@ React SPA of shared-todo, feature-based folders, installable as a minimal PWA. G
 
 Before editing files for a substantial task:
 
-- Run `pnpm dlx @tanstack/intent@latest list` from `web/` (the root has no `package.json`, so it finds nothing there) to see available local skills.
+- Run `pnpm dlx @tanstack/intent@latest list` from `apps/web/` (the root has no `package.json`, so it finds nothing there) to see available local skills.
 - If a listed skill matches the task, run `pnpm dlx @tanstack/intent@latest load <package>#<skill>` before changing files.
 - Use the loaded `SKILL.md` guidance while making the change.
 - Multiple matches: prefer the most specific local skill for the package or concern you are changing; load additional skills only when the task spans multiple packages or concerns.
@@ -27,7 +27,7 @@ Enabled skill scope is `@tanstack/*` only (see `intent.skills` in `package.json`
 - `src/styles.css` - Tailwind CSS entry.
 - `vite.config.ts` - Vite configuration (React, Tailwind, router and devtools plugins).
 - `vitest.config.ts` - standalone, does not extend `vite.config.ts`: it only sets the `tsconfig` path alias and the React plugin, so dev plugins do not run in tests. Add to it whatever a test needs.
-- `biome.json` - formatter and linter (Biome). Biome reads only this folder's `.gitignore` (its VCS root is `web/`), so keep `web` toolchain patterns there; env and OS patterns live in the root `.gitignore`.
+- `biome.json` - formatter and linter (Biome). Biome reads only this folder's `.gitignore` (its VCS root is `apps/web/`), so keep `web` toolchain patterns there; env and OS patterns live in the root `.gitignore`.
 
 Feature code (components, hooks, API calls) goes in feature folders under `src/`; none exist yet.
 
@@ -35,7 +35,7 @@ Package manager is pnpm; the version is pinned in `package.json` (`packageManage
 
 ### Validation
 
-Run from `web/`: `pnpm install --frozen-lockfile`, `pnpm check`, `pnpm typecheck`, `pnpm build`, `pnpm test` (no tests yet) before considering a change done; CI (`.github/workflows/web-ci.yml`) runs the same on push/PR to `main`, path-filtered to `web/`.
+Run from `apps/web/`: `pnpm install --frozen-lockfile`, `pnpm check`, `pnpm typecheck`, `pnpm build`, `pnpm test` (no tests yet) before considering a change done; CI (`.github/workflows/web-ci.yml`) runs the same on push/PR to `main`, path-filtered to `apps/web/`.
 
 ### Open Questions
 
