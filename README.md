@@ -10,7 +10,7 @@ Status: early scaffold (API and web skeletons), no features implemented yet.
 
 ## Tech stack
 
-.NET (ASP.NET Core), Vertical Slice Architecture · React SPA (Vite, TanStack Router, Tailwind) · SignalR · EF Core + SQL Server · Azure Container Apps (API) · Cloudflare Workers (frontend)
+.NET (ASP.NET Core), Vertical Slice Architecture · React SPA (Vite, TanStack Router, Tailwind) · SignalR · EF Core + SQL Server · planned: Azure Container Apps (API) · Cloudflare Workers (frontend)
 
 ## Structure
 
