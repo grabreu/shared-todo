@@ -2,6 +2,8 @@ using SharedTodo.Api.Common.Behaviors;
 using SharedTodo.Api.Common.ExceptionHandling;
 using SharedTodo.Api.Data;
 using SharedTodo.Api.Data.Interceptors;
+using SharedTodo.Api.Features.Auth.Login;
+using SharedTodo.Api.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,6 +52,27 @@ builder.Services.AddDbContext<ApplicationDbContext>((sp, options) =>
         .AddInterceptors(sp.GetRequiredService<DispatchDomainEventsInterceptor>());
 });
 
+builder.Services.AddOptions<JwtOptions>()
+    .BindConfiguration(JwtOptions.SectionName)
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
+
+builder.Services.AddIdentityCore<ApplicationUser>(options =>
+{
+    options.Password.RequiredLength = 6;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireDigit = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireLowercase = false;
+    options.User.RequireUniqueEmail = true;
+})
+.AddSignInManager()
+.AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddSingleton<JwtTokenProvider>();
+
+builder.Services.AddAuthentication();
+
 var app = builder.Build();
 
 app.UseSerilogRequestLogging();
@@ -68,6 +91,8 @@ app.MapHealthChecks("/alive", new HealthCheckOptions
 {
     Predicate = r => r.Tags.Contains("live")
 });
+
+app.MapLoginEndpoint();
 
 if (app.Environment.IsDevelopment())
 {
