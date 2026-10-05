@@ -3,6 +3,7 @@ using SharedTodo.Api.Common.ExceptionHandling;
 using SharedTodo.Api.Data;
 using SharedTodo.Api.Data.Interceptors;
 using SharedTodo.Api.Features.Auth.Login;
+using SharedTodo.Api.Features.Auth.Register;
 using SharedTodo.Api.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -93,6 +94,7 @@ app.MapHealthChecks("/alive", new HealthCheckOptions
 });
 
 app.MapLoginEndpoint();
+app.MapRegisterEndpoint();
 
 if (app.Environment.IsDevelopment())
 {
