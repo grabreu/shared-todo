@@ -17,4 +17,3 @@ public class JwtOptions
     [Range(1, int.MaxValue)]
     public int AccessTokenExpirationMinutes { get; init; }
 }
-

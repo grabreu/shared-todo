@@ -2,6 +2,7 @@ using SharedTodo.Api.Common.Behaviors;
 using SharedTodo.Api.Common.ExceptionHandling;
 using SharedTodo.Api.Data;
 using SharedTodo.Api.Data.Interceptors;
+using SharedTodo.Api.Features.Auth.GetCurrentUser;
 using SharedTodo.Api.Features.Auth.Login;
 using SharedTodo.Api.Features.Auth.Register;
 using SharedTodo.Api.Identity;
@@ -15,7 +16,22 @@ builder.Host.UseSerilog((context, services, configuration) =>
         .Enrich.FromLogContext();
 });
 
-builder.Services.AddOpenApi();
+builder.Services.AddOpenApi(options =>
+{
+    options.AddDocumentTransformer((document, context, cancellationToken) =>
+    {
+        document.Components ??= new();
+        document.Components.SecuritySchemes ??= new Dictionary<string, IOpenApiSecurityScheme>();
+        document.Components.SecuritySchemes.Add("Bearer", new OpenApiSecurityScheme
+        {
+            Type = SecuritySchemeType.Http,
+            Scheme = "bearer",
+            BearerFormat = "JWT"
+        });
+
+        return Task.CompletedTask;
+    });
+});
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
@@ -72,7 +88,23 @@ builder.Services.AddIdentityCore<ApplicationUser>(options =>
 
 builder.Services.AddSingleton<JwtTokenProvider>();
 
-builder.Services.AddAuthentication();
+builder.Services.AddOptions<JwtBearerOptions>(JwtBearerDefaults.AuthenticationScheme)
+    .Configure<IOptions<JwtOptions>>((options, jwt) =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Value.SecretKey)),
+            ValidIssuer = jwt.Value.Issuer,
+            ValidAudience = jwt.Value.Audience,
+            ClockSkew = TimeSpan.Zero
+        };
+    });
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
+builder.Services.AddAuthorization();
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<CurrentUser>();
 
 var app = builder.Build();
 
@@ -95,6 +127,7 @@ app.MapHealthChecks("/alive", new HealthCheckOptions
 
 app.MapLoginEndpoint();
 app.MapRegisterEndpoint();
+app.MapGetCurrentUserEndpoint();
 
 if (app.Environment.IsDevelopment())
 {
