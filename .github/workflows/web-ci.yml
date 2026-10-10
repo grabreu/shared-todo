@@ -109,3 +109,14 @@ jobs:
 
       - name: Test
         run: pnpm test
+
+  status:
+    name: Status
+    needs: [changes, format, test]
+    if: always()
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check results
+        if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')
+        run: exit 1

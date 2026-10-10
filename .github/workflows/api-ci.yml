@@ -96,3 +96,14 @@ jobs:
 
       - name: Test
         run: dotnet test --no-build --configuration Release
+
+  status:
+    name: Status
+    needs: [changes, format, test]
+    if: always()
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check results
+        if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')
+        run: exit 1
