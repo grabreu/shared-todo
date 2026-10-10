@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SharedTodo.Api.Data;
+using SharedTodo.Users.Persistence;
 
 #nullable disable
 
-namespace SharedTodo.Api.Data.Migrations
+namespace SharedTodo.Users.Persistence.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260928144449_InitialCreate")]
+    [DbContext(typeof(UsersDbContext))]
+    [Migration("20261009011142_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

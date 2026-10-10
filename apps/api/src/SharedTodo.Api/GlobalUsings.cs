@@ -1,12 +1,5 @@
-global using System.Reflection;
-global using Desfecho;
-global using FluentValidation;
-global using Mediator;
 global using Microsoft.AspNetCore.Diagnostics;
-global using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 global using Microsoft.AspNetCore.Mvc;
-global using Microsoft.EntityFrameworkCore;
-global using Microsoft.EntityFrameworkCore.Diagnostics;
-global using Microsoft.Extensions.Diagnostics.HealthChecks;
+global using Microsoft.AspNetCore.OpenApi;
+global using Microsoft.OpenApi;
 global using Scalar.AspNetCore;
-global using Serilog;
